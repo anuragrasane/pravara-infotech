@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Pravara Infotech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/logo.png" alt="Pravara Infotech Logo">
+      </a>
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="career.html">Career</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline-white navbar-cta">Get a Quote &#10095;</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="page-hero" style="background-image: url('images/hero-bg.jpg');">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1>Contact Us</h1>
+        <p>Get in touch for project inquiries, support, or partnerships</p>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep">&#9656;</span>
+          <span>Contact</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Contact Info (Dark Background) -->
+        <div class="contact-info reveal">
+          <h3>Get in Touch</h3>
+          <p>Have a project in mind? Let's discuss how we can help.</p>
+
+          <div class="ci-item">
+            <div class="ci-icon">&#128205;</div>
+            <div>
+              <h4>Address</h4>
+              <p>Office No. 1, Pune - Nashik Hwy, opposite to Amrutvahini Engineering College, Amrutnagar, Ghulewadi, Maharashtra 422608</p>
+            </div>
+          </div>
+
+          <div class="ci-item">
+            <div class="ci-icon">&#128222;</div>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:+919762424851" style="color: var(--gray-300);">+91 9762424851</a></p>
+            </div>
+          </div>
+
+          <div class="ci-item">
+            <div class="ci-icon">&#9993;&#65039;</div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:thepravara@gmail.com" style="color: var(--gray-300);">thepravara@gmail.com</a></p>
+              <p><a href="mailto:contact@pravarainfotech.in" style="color: var(--gray-300);">contact@pravarainfotech.in</a></p>
+              <p><a href="mailto:info@pravarainfotech.in" style="color: var(--gray-300);">info@pravarainfotech.in</a></p>
+            </div>
+          </div>
+
+          <div class="ci-item">
+            <div class="ci-icon">&#128336;</div>
+            <div>
+              <h4>Hours</h4>
+              <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Contact Form (White Background, Border) -->
+        <div class="contact-form reveal">
+          <h3>Send Us a Message</h3>
+          <p>Fill out the form below and we'll get back to you.</p>
+
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name <span style="color: var(--primary-accent);">*</span></label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email <span style="color: var(--primary-accent);">*</span></label>
+                <input type="email" id="email" name="email" placeholder="Your email address" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="reason">Reason for Contact</label>
+              <select id="reason" name="reason">
+                <option value="" disabled selected>Select a reason</option>
+                <option value="Project Inquiry">Project Inquiry</option>
+                <option value="Support">Support</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Subject of your message">
+            </div>
+            <div class="form-group">
+              <label for="message">Message <span style="color: var(--primary-accent);">*</span></label>
+              <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark">Send Message</button>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CLIENT TESTIMONIALS ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Client Feedback</span>
+        <h2 class="section-title">What People Say</h2>
+      </div>
+      <div class="contact-testimonials">
+
+        <div class="ct-card reveal">
+          <p>"The Pravara team was incredibly responsive and helpful. They made the process seamless!"</p>
+          <span class="author">— Alex R.</span>
+        </div>
+
+        <div class="ct-card reveal">
+          <p>"Excellent support and fast turnaround. Highly recommended!"</p>
+          <span class="author">— Priya S.</span>
+        </div>
+
+        <div class="ct-card reveal">
+          <p>"Professional, creative, and reliable. Will work with them again!"</p>
+          <span class="author">— John D.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA SECTION ========== -->
+  <section class="cta-section" style="background-image: url('images/cta-bg.jpg');">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2>Ready to Start Your Project?</h2>
+        <p>Let's collaborate and bring your ideas to life. Contact us today for a free consultation and let our team build the digital solution your business deserves.</p>
+        <div class="cta-buttons">
+          <a href="contact.html#contact-form" class="btn btn-primary btn-lg">Start Your Project &#10095;</a>
+          <a href="services.html" class="btn btn-outline-white btn-lg">Our Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="index.html">
+            <img src="images/logo.png" alt="Pravara Infotech Logo">
+          </a>
+          <p>Pravara Infotech is a leading technology company dedicated to empowering businesses with innovative digital solutions. We combine creativity, technical expertise, and strategic thinking to deliver results that matter.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">&#128279;</a>
+            <a href="#" aria-label="Twitter">&#128038;</a>
+            <a href="#" aria-label="LinkedIn">&#128101;</a>
+            <a href="#" aria-label="Instagram">&#128247;</a>
+            <a href="#" aria-label="GitHub">&#128187;</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="career.html">Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="services.html">Web Development</a></li>
+            <li><a href="services.html">Mobile App Development</a></li>
+            <li><a href="services.html">UI/UX Design</a></li>
+            <li><a href="services.html">Cloud Solutions</a></li>
+            <li><a href="services.html">Digital Marketing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-newsletter">
+          <h4>Stay Updated</h4>
+          <p>Subscribe to our newsletter for the latest updates, insights, and technology trends delivered straight to your inbox.</p>
+          <form class="newsletter-form" action="#" method="POST">
+            <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+            <button type="submit" class="btn btn-primary">Subscribe &#10095;</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 Pravara Infotech. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCROLL TO TOP ========== -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">&#8593;</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

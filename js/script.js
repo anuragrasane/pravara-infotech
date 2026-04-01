@@ -1,0 +1,272 @@
+/* ============================================
+   PRAVARA INFOTECH - Main JavaScript
+   ============================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ---- Navbar Scroll Effect ----
+  const navbar = document.querySelector('.navbar');
+  const scrollTop = document.querySelector('.scroll-top');
+  
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    
+    if (navbar) {
+      navbar.classList.toggle('scrolled', scrollY > 50);
+    }
+    
+    if (scrollTop) {
+      scrollTop.classList.toggle('visible', scrollY > 500);
+    }
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  // ---- Mobile Menu ----
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.navbar-menu');
+  const overlay = document.querySelector('.mobile-overlay');
+  
+  if (menuToggle && navMenu) {
+    const toggleMenu = () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      if (overlay) overlay.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    };
+
+    menuToggle.addEventListener('click', toggleMenu);
+    
+    if (overlay) {
+      overlay.addEventListener('click', toggleMenu);
+    }
+
+    // Close menu on link click
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('active')) {
+          toggleMenu();
+        }
+      });
+    });
+  }
+
+  // ---- Scroll to Top ----
+  if (scrollTop) {
+    scrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ---- Scroll Reveal ----
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ---- Counter Animation ----
+  const counters = document.querySelectorAll('[data-counter]');
+  
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-counter'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 2000;
+        const start = 0;
+        const startTime = performance.now();
+
+        const animate = (currentTime) => {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(start + (target - start) * eased);
+          el.textContent = current + suffix;
+          
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            el.textContent = target + suffix;
+          }
+        };
+
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => counterObserver.observe(el));
+
+  // ---- Floating Particles ----
+  const particlesContainer = document.querySelector('.hero-particles');
+  if (particlesContainer) {
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = (Math.random() * 4 + 2) + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+      particle.style.animationDelay = (Math.random() * 10) + 's';
+      particle.style.opacity = Math.random() * 0.5 + 0.1;
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // ---- Contact Form ----
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Simple validation
+      if (!data.name || !data.email || !data.message) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
+      }
+      
+      // Simulate form submission
+      const btn = contactForm.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="btn-icon">&#9696;</span> Sending...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        showNotification('Thank you! Your message has been sent successfully. We will get back to you soon.', 'success');
+        contactForm.reset();
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 1500);
+    });
+  }
+
+  // ---- Newsletter Form ----
+  const newsletterForms = document.querySelectorAll('.newsletter-form');
+  newsletterForms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input');
+      if (input && input.value) {
+        showNotification('Thank you for subscribing! You will receive our latest updates.', 'success');
+        input.value = '';
+      }
+    });
+  });
+
+  // ---- Notification System ----
+  function showNotification(message, type = 'success') {
+    // Remove existing notification
+    const existing = document.querySelector('.notification-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `notification-toast notification-${type}`;
+    toast.innerHTML = `
+      <div class="notification-content">
+        <span class="notification-icon">${type === 'success' ? '&#10003;' : '&#10007;'}</span>
+        <span class="notification-message">${message}</span>
+        <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+      </div>
+    `;
+
+    // Style the toast
+    Object.assign(toast.style, {
+      position: 'fixed',
+      top: '1.5rem',
+      right: '1.5rem',
+      maxWidth: '420px',
+      width: '90%',
+      zIndex: '9999',
+      padding: '1rem 1.25rem',
+      borderRadius: '0.75rem',
+      background: type === 'success' ? '#10b981' : '#ef4444',
+      color: '#fff',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+      animation: 'fadeInDown 0.4s ease',
+      fontFamily: 'inherit'
+    });
+
+    const content = toast.querySelector('.notification-content');
+    Object.assign(content.style, {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem'
+    });
+
+    const icon = toast.querySelector('.notification-icon');
+    Object.assign(icon.style, {
+      fontSize: '1.2rem',
+      fontWeight: 'bold',
+      flexShrink: '0'
+    });
+
+    const msg = toast.querySelector('.notification-message');
+    Object.assign(msg.style, {
+      flex: '1',
+      fontSize: '0.9rem',
+      lineHeight: '1.4'
+    });
+
+    const closeBtn = toast.querySelector('.notification-close');
+    Object.assign(closeBtn.style, {
+      background: 'none',
+      border: 'none',
+      color: '#fff',
+      fontSize: '1.25rem',
+      cursor: 'pointer',
+      opacity: '0.8',
+      flexShrink: '0'
+    });
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-10px)';
+      toast.style.transition = 'all 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 5000);
+  }
+
+  // ---- Smooth Scroll for Anchor Links ----
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const targetId = anchor.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const offset = navbar ? navbar.offsetHeight + 20 : 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ---- Active Nav Link ----
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.navbar-menu a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
+});
