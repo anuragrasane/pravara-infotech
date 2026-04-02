@@ -1183,12 +1183,10 @@ input, textarea, select { font-family: inherit; outline: none; }
   width: auto;
   max-width: 180px;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.5;
+  opacity: 1;
   transition: all var(--transition);
 }
 .trusted-logo-item:hover img {
-  filter: grayscale(0%);
   opacity: 1;
 }
 
