@@ -130,30 +130,52 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- Contact Form ----
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const formData = new FormData(contactForm);
       const data = Object.fromEntries(formData.entries());
+      const accessKey = String(data.access_key || '').trim();
       
       // Simple validation
       if (!data.name || !data.email || !data.message) {
         showNotification('Please fill in all required fields.', 'error');
         return;
       }
+
+      if (!accessKey || accessKey === 'YOUR_WEB3FORMS_API_KEY') {
+        showNotification('Please add your Web3Forms API key in contact.html before submitting.', 'error');
+        return;
+      }
       
-      // Simulate form submission
       const btn = contactForm.querySelector('button[type="submit"]');
       const originalText = btn.innerHTML;
       btn.innerHTML = '<span class="btn-icon">&#9696;</span> Sending...';
       btn.disabled = true;
-      
-      setTimeout(() => {
-        showNotification('Thank you! Your message has been sent successfully. We will get back to you soon.', 'success');
-        contactForm.reset();
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          showNotification('Thank you! Your message has been sent successfully. We will get back to you soon.', 'success');
+          contactForm.reset();
+        } else {
+          showNotification(result.message || 'Unable to send your message right now. Please try again.', 'error');
+        }
+      } catch (error) {
+        showNotification('Network error while sending the form. Please try again.', 'error');
+      } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
-      }, 1500);
+      }
     });
   }
 

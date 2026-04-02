@@ -101,7 +101,10 @@
           <h3>Send Us a Message</h3>
           <p>Fill out the form below and we'll get back to you.</p>
 
-          <form id="contact-form">
+          <form id="contact-form" method="POST" action="https://api.web3forms.com/submit">
+            <input type="hidden" name="access_key" value="6ef90e2d-15c2-4e44-8ecc-26e3bdbd2644">
+            <input type="hidden" name="from_name" value="Pravara Infotech Website">
+            <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name <span style="color: var(--primary-accent);">*</span></label>
