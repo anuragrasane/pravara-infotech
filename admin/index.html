@@ -1080,8 +1080,8 @@
     addProjectBtn.addEventListener('click', () => {
       resetForm();
       formModalTitle.textContent = 'Add New Project';
-      // Add 3 empty feature inputs by default
-      addFeatureInput(); addFeatureInput(); addFeatureInput();
+      // Start with one empty feature row
+      addFeatureInput();
       openModal('projectFormModal');
     });
 

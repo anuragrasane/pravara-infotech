@@ -389,14 +389,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  // Click handlers for portfolio items
+  // Click handlers for portfolio items — use delegation so dynamically rendered cards work
   if (modalOverlay) {
-    document.querySelectorAll('.portfolio-item[data-project]').forEach(item => {
-      item.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+      const item = e.target.closest('.portfolio-item[data-project]');
+      if (item) {
         e.preventDefault();
-        const projectKey = item.getAttribute('data-project');
-        openProjectModal(projectKey);
-      });
+        openProjectModal(item.getAttribute('data-project'));
+      }
     });
 
     // Close modal
