@@ -291,4 +291,254 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.add('active');
     }
   });
+
+  // ---- Project Modal ----
+  const projectData = {
+    agritech: {
+      tag: 'Agriculture',
+      title: 'Agri-Tech ERP System',
+      description: 'A comprehensive enterprise resource planning platform specifically designed for agricultural businesses. The system integrates crop management, supply chain tracking, financial accounting, and real-time analytics into a unified dashboard. Farmers and agribusiness managers can monitor operations end-to-end — from seed procurement and field management to harvest logistics and market sales — enabling data-driven decisions that improve yield and reduce waste.',
+      features: [
+        'Real-time crop monitoring dashboard',
+        'Supply chain & inventory management',
+        'Financial accounting & invoicing',
+        'Weather integration & forecasting',
+        'Harvest planning & logistics',
+        'Multi-farm support with role management'
+      ],
+      tech: ['React', 'Node.js', 'MongoDB', 'AWS', 'Chart.js', 'REST API'],
+      images: [
+        'images/port-agritech.jpg',
+        'images/svc-web.jpg',
+        'images/svc-cloud.jpg'
+      ]
+    },
+    dairy: {
+      tag: 'Mobile App',
+      title: 'Dairy Farmers App',
+      description: 'A mobile application that bridges the gap between dairy farmers and consumers by digitizing the entire dairy supply chain. The app features real-time milk collection tracking, automated billing, route optimization for delivery, and quality analytics. Farmers can manage their livestock records, track daily yields, and access market prices — all from their smartphone. The consumer-facing side enables subscription management and doorstep delivery tracking.',
+      features: [
+        'Milk collection & quality tracking',
+        'Automated billing & payments',
+        'Route optimization for delivery',
+        'Livestock health record management',
+        'Consumer subscription management',
+        'Real-time delivery tracking'
+      ],
+      tech: ['React Native', 'Firebase', 'Node.js', 'Google Maps API', 'Razorpay'],
+      images: [
+        'images/port-dairy.jpg',
+        'images/svc-mobile.jpg',
+        'images/svc-uiux.jpg'
+      ]
+    },
+    cropai: {
+      tag: 'AI / ML',
+      title: 'Crop Disease AI Detection',
+      description: 'An AI-powered mobile solution that uses advanced image recognition and deep learning models to identify crop diseases in real-time. Farmers simply take a photo of affected crop leaves using their smartphone camera, and the system instantly analyzes the image, identifies the disease with high accuracy, and provides actionable treatment recommendations. The model was trained on thousands of images covering 30+ common crop diseases across major agricultural crops.',
+      features: [
+        'Real-time disease identification via camera',
+        'Treatment & pesticide recommendations',
+        'Disease history & trend analytics',
+        'Offline mode for remote areas',
+        '30+ disease categories supported',
+        'Multi-crop support (rice, wheat, tomato, etc.)'
+      ],
+      tech: ['Python', 'TensorFlow', 'Keras', 'Flutter', 'REST API', 'OpenCV'],
+      images: [
+        'images/port-ai.jpg',
+        'images/svc-research.jpg',
+        'images/svc-mobile.jpg'
+      ]
+    },
+    irrigation: {
+      tag: 'IoT',
+      title: 'Smart Irrigation System',
+      description: 'An IoT-based smart irrigation solution that enables precision agriculture through real-time environmental monitoring. The system uses a network of soil moisture sensors, weather stations, and water flow meters to automatically optimize irrigation schedules. Farmers receive alerts and can control irrigation pumps remotely via a mobile app. The platform reduces water usage by up to 40% while ensuring optimal crop hydration based on real-time soil and weather conditions.',
+      features: [
+        'Soil moisture & temperature sensors',
+        'Automated pump control via IoT',
+        'Weather-based irrigation scheduling',
+        'Water usage analytics & reporting',
+        'Mobile app for remote monitoring',
+        'Alerts for anomalies & maintenance'
+      ],
+      tech: ['Arduino', 'Raspberry Pi', 'MQTT', 'Node.js', 'React', 'AWS IoT'],
+      images: [
+        'images/port-iot.jpg',
+        'images/svc-cloud.jpg',
+        'images/svc-web.jpg'
+      ]
+    },
+    ecommerce: {
+      tag: 'E-Commerce',
+      title: 'E-Commerce Platform',
+      description: 'A full-featured multi-vendor marketplace built for scale, supporting thousands of products across multiple categories. The platform features advanced search with filters, AI-powered product recommendations, multi-gateway payment processing, vendor dashboards with analytics, and a complete order management system. Designed for high performance with a modern, intuitive UI, the platform delivers a seamless shopping experience across all devices.',
+      features: [
+        'Multi-vendor marketplace architecture',
+        'AI-powered product recommendations',
+        'Advanced search with smart filters',
+        'Multi-gateway payment processing',
+        'Vendor analytics dashboard',
+        'Inventory & order management system'
+      ],
+      tech: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe', 'Redis', 'Elasticsearch'],
+      images: [
+        'images/svc-ecommerce.jpg',
+        'images/svc-web.jpg',
+        'images/svc-uiux.jpg'
+      ]
+    },
+    healthcare: {
+      tag: 'Healthcare',
+      title: 'Healthcare Analytics Platform',
+      description: 'A HIPAA-compliant healthcare analytics platform built for hospitals and healthcare providers. The system aggregates patient data from multiple sources — EHR systems, lab results, and medical devices — into unified dashboards with powerful visualization and reporting capabilities. Healthcare administrators can track key performance indicators, monitor patient outcomes, identify trends, and generate compliance reports. The platform ensures end-to-end data encryption and strict access controls.',
+      features: [
+        'HIPAA-compliant data handling',
+        'Patient data visualization dashboards',
+        'Multi-source data integration (EHR, labs)',
+        'Automated compliance reporting',
+        'Role-based access controls',
+        'Trend analysis & outcome tracking'
+      ],
+      tech: ['React', 'Python', 'Django', 'PostgreSQL', 'D3.js', 'Docker'],
+      images: [
+        'images/port-healthcare.jpg',
+        'images/svc-cloud.jpg',
+        'images/svc-research.jpg'
+      ]
+    }
+  };
+
+  const modalOverlay = document.getElementById('projectModal');
+  const modalMainImg = document.getElementById('projectModalMainImg');
+  const modalThumbs = document.getElementById('projectModalThumbs');
+  const modalTag = document.getElementById('projectModalTag');
+  const modalTitle = document.getElementById('projectModalTitle');
+  const modalDesc = document.getElementById('projectModalDesc');
+  const modalFeatures = document.getElementById('projectModalFeatures');
+  const modalTech = document.getElementById('projectModalTech');
+  const galleryCounter = document.getElementById('galleryCounter');
+  const galleryPrev = document.getElementById('galleryPrev');
+  const galleryNext = document.getElementById('galleryNext');
+  const modalClose = document.getElementById('projectModalClose');
+
+  let currentGalleryIndex = 0;
+  let currentImages = [];
+
+  function updateGallery(index) {
+    if (!currentImages.length) return;
+    currentGalleryIndex = index;
+    modalMainImg.style.opacity = '0';
+    setTimeout(() => {
+      modalMainImg.src = currentImages[index];
+      modalMainImg.alt = modalTitle.textContent + ' screenshot ' + (index + 1);
+      modalMainImg.style.opacity = '1';
+    }, 150);
+    galleryCounter.textContent = (index + 1) + ' / ' + currentImages.length;
+    // Update thumb active state
+    modalThumbs.querySelectorAll('img').forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === index);
+    });
+  }
+
+  function openProjectModal(projectKey) {
+    const data = projectData[projectKey];
+    if (!data) return;
+
+    // Populate modal
+    modalTag.textContent = data.tag;
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.description;
+
+    // Features
+    modalFeatures.innerHTML = '';
+    data.features.forEach(f => {
+      const li = document.createElement('li');
+      li.textContent = f;
+      modalFeatures.appendChild(li);
+    });
+
+    // Tech badges
+    modalTech.innerHTML = '';
+    data.tech.forEach(t => {
+      const span = document.createElement('span');
+      span.textContent = t;
+      modalTech.appendChild(span);
+    });
+
+    // Gallery
+    currentImages = data.images;
+    modalThumbs.innerHTML = '';
+    data.images.forEach((img, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = img;
+      thumb.alt = data.title + ' thumbnail ' + (i + 1);
+      if (i === 0) thumb.classList.add('active');
+      thumb.addEventListener('click', () => updateGallery(i));
+      modalThumbs.appendChild(thumb);
+    });
+
+    updateGallery(0);
+
+    // Show modal
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProjectModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Click handlers for portfolio items
+  if (modalOverlay) {
+    document.querySelectorAll('.portfolio-item[data-project]').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const projectKey = item.getAttribute('data-project');
+        openProjectModal(projectKey);
+      });
+    });
+
+    // Close modal
+    if (modalClose) {
+      modalClose.addEventListener('click', closeProjectModal);
+    }
+
+    // Close on overlay click
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeProjectModal();
+      }
+    });
+
+    // Gallery navigation
+    if (galleryPrev) {
+      galleryPrev.addEventListener('click', () => {
+        const newIndex = currentGalleryIndex > 0 ? currentGalleryIndex - 1 : currentImages.length - 1;
+        updateGallery(newIndex);
+      });
+    }
+    if (galleryNext) {
+      galleryNext.addEventListener('click', () => {
+        const newIndex = currentGalleryIndex < currentImages.length - 1 ? currentGalleryIndex + 1 : 0;
+        updateGallery(newIndex);
+      });
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (!modalOverlay.classList.contains('active')) return;
+      if (e.key === 'Escape') closeProjectModal();
+      if (e.key === 'ArrowLeft') {
+        const newIndex = currentGalleryIndex > 0 ? currentGalleryIndex - 1 : currentImages.length - 1;
+        updateGallery(newIndex);
+      }
+      if (e.key === 'ArrowRight') {
+        const newIndex = currentGalleryIndex < currentImages.length - 1 ? currentGalleryIndex + 1 : 0;
+        updateGallery(newIndex);
+      }
+    });
+  }
 });

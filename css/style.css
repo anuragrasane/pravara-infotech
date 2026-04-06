@@ -435,6 +435,270 @@ input, textarea, select { font-family: inherit; outline: none; }
   line-height: 1.6;
 }
 
+/* Make portfolio items clickable */
+.portfolio-item { cursor: pointer; }
+
+/* ---------- Project Detail Modal ---------- */
+.project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s ease;
+  padding: 2rem;
+}
+.project-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.project-modal {
+  background: var(--white);
+  width: 100%;
+  max-width: 1050px;
+  max-height: 90vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+.project-modal-overlay.active .project-modal {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.project-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  color: var(--white);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all var(--transition);
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+.project-modal-close:hover {
+  background: var(--primary-accent);
+  transform: rotate(90deg);
+}
+
+/* Gallery Section */
+.project-modal-gallery {
+  background: var(--dark-900);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.project-modal-gallery-main {
+  position: relative;
+  flex: 1;
+  min-height: 300px;
+  overflow: hidden;
+}
+.project-modal-gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* Gallery Navigation */
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  color: var(--white);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  z-index: 5;
+}
+.gallery-nav:hover { background: var(--primary-accent); }
+.gallery-prev { left: 0.75rem; }
+.gallery-next { right: 0.75rem; }
+.gallery-counter {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--white);
+  padding: 0.3rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Thumbnails */
+.project-modal-thumbs {
+  display: flex;
+  gap: 0;
+  background: var(--dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.project-modal-thumbs img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all var(--transition);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+.project-modal-thumbs img:hover { opacity: 0.8; }
+.project-modal-thumbs img.active {
+  opacity: 1;
+  border-bottom: 2px solid var(--primary-accent);
+}
+
+/* Details Panel */
+.project-modal-details {
+  padding: 2.5rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.project-modal-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--primary-accent);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.25rem;
+}
+.project-modal-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.project-modal-desc {
+  font-size: 0.92rem;
+  color: var(--gray-500);
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+}
+.project-modal-features {
+  margin-bottom: 1.75rem;
+}
+.project-modal-features h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.85rem;
+}
+.project-modal-features ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.project-modal-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: var(--dark);
+  font-weight: 500;
+}
+.project-modal-features li::before {
+  content: '\2713';
+  width: 20px;
+  height: 20px;
+  background: var(--primary-accent);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  flex-shrink: 0;
+}
+.project-modal-tech h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.85rem;
+}
+.project-modal-tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.project-modal-tech-badges span {
+  padding: 0.3rem 0.75rem;
+  background: var(--gray-100);
+  color: var(--dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Modal Responsive */
+@media (max-width: 768px) {
+  .project-modal-overlay { padding: 0; align-items: flex-end; }
+  .project-modal {
+    grid-template-columns: 1fr;
+    max-height: 95vh;
+    max-height: 95dvh;
+    border-radius: 16px 16px 0 0;
+  }
+  .project-modal-gallery-main { min-height: 220px; max-height: 260px; }
+  .project-modal-details { padding: 1.75rem 1.5rem 2rem; }
+  .project-modal-title { font-size: 1.25rem; }
+  .project-modal-desc { font-size: 0.88rem; margin-bottom: 1.25rem; }
+  .project-modal-thumbs img { width: 60px; height: 45px; }
+  .gallery-nav { width: 32px; height: 32px; font-size: 0.8rem; }
+  .project-modal-close { top: 0.75rem; right: 0.75rem; width: 36px; height: 36px; font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  .project-modal-gallery-main { min-height: 180px; max-height: 220px; }
+  .project-modal-details { padding: 1.5rem 1.25rem 2rem; }
+  .project-modal-title { font-size: 1.15rem; }
+  .project-modal-features li { font-size: 0.82rem; }
+  .project-modal-tech-badges span { font-size: 0.68rem; }
+}
+
 /* ---------- About / Story Split ---------- */
 .about-split {
   display: grid;

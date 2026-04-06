@@ -155,7 +155,7 @@
             </div>
             <div class="portfolio-grid">
 
-                <div class="portfolio-item reveal">
+                <div class="portfolio-item reveal" data-project="agritech">
                     <img src="images/port-agritech.jpg" alt="Agri-Tech ERP System">
                     <div class="portfolio-overlay">
                         <span class="tag">Agriculture</span>
@@ -164,7 +164,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="portfolio-item reveal" data-project="dairy">
                     <img src="images/port-dairy.jpg" alt="Dairy Farmers App">
                     <div class="portfolio-overlay">
                         <span class="tag">Mobile App</span>
@@ -173,7 +173,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="portfolio-item reveal" data-project="cropai">
                     <img src="images/port-ai.jpg" alt="Crop Disease AI Detection">
                     <div class="portfolio-overlay">
                         <span class="tag">AI / ML</span>
@@ -182,7 +182,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="portfolio-item reveal" data-project="irrigation">
                     <img src="images/port-iot.jpg" alt="Smart Irrigation System">
                     <div class="portfolio-overlay">
                         <span class="tag">IoT</span>
@@ -191,7 +191,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="portfolio-item reveal" data-project="ecommerce">
                     <img src="images/svc-ecommerce.jpg" alt="E-Commerce Platform">
                     <div class="portfolio-overlay">
                         <span class="tag">E-Commerce</span>
@@ -200,7 +200,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="portfolio-item reveal" data-project="healthcare">
                     <img src="images/port-healthcare.jpg" alt="Healthcare Analytics Platform">
                     <div class="portfolio-overlay">
                         <span class="tag">Healthcare</span>
@@ -212,6 +212,35 @@
             </div>
         </div>
     </section>
+
+    <!-- ========== PROJECT DETAIL MODAL ========== -->
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal">
+            <button class="project-modal-close" id="projectModalClose" aria-label="Close modal">&times;</button>
+            <div class="project-modal-gallery">
+                <div class="project-modal-gallery-main">
+                    <img src="" alt="" id="projectModalMainImg">
+                    <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous image">&#10094;</button>
+                    <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next image">&#10095;</button>
+                    <div class="gallery-counter" id="galleryCounter">1 / 3</div>
+                </div>
+                <div class="project-modal-thumbs" id="projectModalThumbs"></div>
+            </div>
+            <div class="project-modal-details">
+                <span class="project-modal-tag" id="projectModalTag"></span>
+                <h2 class="project-modal-title" id="projectModalTitle"></h2>
+                <p class="project-modal-desc" id="projectModalDesc"></p>
+                <div class="project-modal-features">
+                    <h4>Key Features</h4>
+                    <ul id="projectModalFeatures"></ul>
+                </div>
+                <div class="project-modal-tech">
+                    <h4>Technologies Used</h4>
+                    <div class="project-modal-tech-badges" id="projectModalTech"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ========== EDUCATION & RESEARCH SHOWCASE ========== -->
     <section class="section" id="education-research" style="background: var(--gray-50);">
