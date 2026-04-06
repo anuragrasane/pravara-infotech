@@ -57,63 +57,7 @@
     <!-- ========== PORTFOLIO SECTION ========== -->
     <section class="portfolio-section section" id="portfolio" style="background: var(--dark); padding-top: 5rem;">
         <div class="container">
-            <div class="portfolio-grid">
-
-                <div class="portfolio-item reveal" data-project="agritech">
-                    <img src="images/port-agritech.jpg" alt="Agri-Tech ERP System">
-                    <div class="portfolio-overlay">
-                        <span class="tag">Agriculture</span>
-                        <h3>Agri-Tech ERP</h3>
-                        <p>Comprehensive enterprise resource planning platform for agricultural businesses with real-time analytics.</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item reveal" data-project="dairy">
-                    <img src="images/port-dairy.jpg" alt="Dairy Farmers App">
-                    <div class="portfolio-overlay">
-                        <span class="tag">Mobile App</span>
-                        <h3>Dairy Farmers App</h3>
-                        <p>Mobile application connecting dairy farmers with consumers, featuring tracking, billing, and route optimization.</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item reveal" data-project="cropai">
-                    <img src="images/port-ai.jpg" alt="Crop Disease AI Detection">
-                    <div class="portfolio-overlay">
-                        <span class="tag">AI / ML</span>
-                        <h3>Crop Disease AI</h3>
-                        <p>AI-powered image recognition system that identifies crop diseases in real-time using smartphone cameras.</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item reveal" data-project="irrigation">
-                    <img src="images/port-iot.jpg" alt="Smart Irrigation System">
-                    <div class="portfolio-overlay">
-                        <span class="tag">IoT</span>
-                        <h3>Smart Irrigation</h3>
-                        <p>IoT-based smart irrigation solution monitoring soil moisture, weather, and water usage in real-time.</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item reveal" data-project="ecommerce">
-                    <img src="images/svc-ecommerce.jpg" alt="E-Commerce Platform">
-                    <div class="portfolio-overlay">
-                        <span class="tag">E-Commerce</span>
-                        <h3>E-Commerce Platform</h3>
-                        <p>Full-featured multi-vendor marketplace with advanced search, recommendations, and multi-gateway payments.</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item reveal" data-project="healthcare">
-                    <img src="images/port-healthcare.jpg" alt="Healthcare Analytics Platform">
-                    <div class="portfolio-overlay">
-                        <span class="tag">Healthcare</span>
-                        <h3>Healthcare Analytics</h3>
-                        <p>HIPAA-compliant analytics platform for healthcare providers with patient data visualization and reporting.</p>
-                    </div>
-                </div>
-
-            </div>
+            <div class="portfolio-grid" id="allProjectsGrid"></div>
         </div>
     </section>
 
@@ -230,6 +174,30 @@
     <!-- ========== SCROLL TO TOP ========== -->
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">&#8593;</button>
 
+    <script src="js/projects-data.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      // Dynamically render ALL projects from ProjectsDB
+      (function () {
+        var grid = document.getElementById('allProjectsGrid');
+        if (!grid || !window.ProjectsDB) return;
+        var projects = window.ProjectsDB.getAll().sort(function(a,b){ return (a.order||0)-(b.order||0); });
+        if (!projects.length) {
+          grid.innerHTML = '<p style="color:#aaa;text-align:center;padding:4rem 0;">No projects found. Add some from the admin panel.</p>';
+          return;
+        }
+        grid.innerHTML = projects.map(function (p) {
+          var thumb = (p.images && p.images[0]) ? p.images[0] : 'images/hero-bg.jpg';
+          var shortDesc = p.description ? p.description.substring(0, 110) + '...' : '';
+          return '<div class="portfolio-item reveal" data-project="' + p.id + '">' +
+            '<img src="' + thumb + '" alt="' + (p.title||'') + '" onerror="this.src=\'images/hero-bg.jpg\'">' +
+            '<div class="portfolio-overlay">' +
+            '<span class="tag">' + (p.tag||'') + '</span>' +
+            '<h3>' + (p.title||'') + '</h3>' +
+            '<p>' + shortDesc + '</p>' +
+            '</div></div>';
+        }).join('');
+      })();
+    </script>
 </body>
 </html>
