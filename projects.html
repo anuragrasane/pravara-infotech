@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our complete portfolio of technology projects at Pravara Infotech. Web development, mobile apps, AI/ML, and IoT solutions.">
+    <title>Our Projects | Pravara Infotech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/logo.png" alt="Pravara Infotech Logo">
+            </a>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="collaborations.html">Collaborations</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="career.html">Career</a></li>
+                <li class="mobile-menu-cta"><a href="contact.html" class="btn btn-primary">Get a Quote &#8594;</a></li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline-white navbar-cta desktop-only">Get a Quote &#8594;</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero" style="background-image: url('images/hero-bg.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Our Projects</h1>
+                <p>Explore our complete portfolio of innovative technology solutions</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span class="separator">&#9656;</span>
+                    <span>Projects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PORTFOLIO SECTION ========== -->
+    <section class="portfolio-section section" id="portfolio" style="background: var(--dark); padding-top: 5rem;">
+        <div class="container">
+            <div class="portfolio-grid">
+
+                <div class="portfolio-item reveal" data-project="agritech">
+                    <img src="images/port-agritech.jpg" alt="Agri-Tech ERP System">
+                    <div class="portfolio-overlay">
+                        <span class="tag">Agriculture</span>
+                        <h3>Agri-Tech ERP</h3>
+                        <p>Comprehensive enterprise resource planning platform for agricultural businesses with real-time analytics.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal" data-project="dairy">
+                    <img src="images/port-dairy.jpg" alt="Dairy Farmers App">
+                    <div class="portfolio-overlay">
+                        <span class="tag">Mobile App</span>
+                        <h3>Dairy Farmers App</h3>
+                        <p>Mobile application connecting dairy farmers with consumers, featuring tracking, billing, and route optimization.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal" data-project="cropai">
+                    <img src="images/port-ai.jpg" alt="Crop Disease AI Detection">
+                    <div class="portfolio-overlay">
+                        <span class="tag">AI / ML</span>
+                        <h3>Crop Disease AI</h3>
+                        <p>AI-powered image recognition system that identifies crop diseases in real-time using smartphone cameras.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal" data-project="irrigation">
+                    <img src="images/port-iot.jpg" alt="Smart Irrigation System">
+                    <div class="portfolio-overlay">
+                        <span class="tag">IoT</span>
+                        <h3>Smart Irrigation</h3>
+                        <p>IoT-based smart irrigation solution monitoring soil moisture, weather, and water usage in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal" data-project="ecommerce">
+                    <img src="images/svc-ecommerce.jpg" alt="E-Commerce Platform">
+                    <div class="portfolio-overlay">
+                        <span class="tag">E-Commerce</span>
+                        <h3>E-Commerce Platform</h3>
+                        <p>Full-featured multi-vendor marketplace with advanced search, recommendations, and multi-gateway payments.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal" data-project="healthcare">
+                    <img src="images/port-healthcare.jpg" alt="Healthcare Analytics Platform">
+                    <div class="portfolio-overlay">
+                        <span class="tag">Healthcare</span>
+                        <h3>Healthcare Analytics</h3>
+                        <p>HIPAA-compliant analytics platform for healthcare providers with patient data visualization and reporting.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECT DETAIL MODAL ========== -->
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal">
+            <button class="project-modal-close" id="projectModalClose" aria-label="Close modal">&times;</button>
+            <div class="project-modal-gallery">
+                <div class="project-modal-gallery-main">
+                    <img src="" alt="" id="projectModalMainImg">
+                    <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous image">&#10094;</button>
+                    <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next image">&#10095;</button>
+                    <div class="gallery-counter" id="galleryCounter">1 / 3</div>
+                </div>
+                <div class="project-modal-thumbs" id="projectModalThumbs"></div>
+            </div>
+            <div class="project-modal-details">
+                <span class="project-modal-tag" id="projectModalTag"></span>
+                <h2 class="project-modal-title" id="projectModalTitle"></h2>
+                <p class="project-modal-desc" id="projectModalDesc"></p>
+                <div class="project-modal-features">
+                    <h4>Key Features</h4>
+                    <ul id="projectModalFeatures"></ul>
+                </div>
+                <div class="project-modal-tech">
+                    <h4>Technologies Used</h4>
+                    <div class="project-modal-tech-badges" id="projectModalTech"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="cta-section" id="cta" style="background-image: url('images/cta-bg.jpg');">
+        <div class="container">
+            <div class="cta-inner reveal">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Let us help you build the technology solutions that will propel your business forward. Get in touch with our team today and start your digital transformation journey.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-lg">Start Your Project &#8594;</a>
+                    <a href="services.html" class="btn btn-outline-white btn-lg">Explore Services &#8594;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Pravara Infotech Logo">
+                    </a>
+                    <p>Pravara Infotech is a leading technology company dedicated to empowering businesses with innovative digital solutions. We combine creativity, technical expertise, and strategic thinking to deliver results that matter.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">&#128279;</a>
+                        <a href="#" aria-label="Twitter">&#128038;</a>
+                        <a href="#" aria-label="LinkedIn">&#128101;</a>
+                        <a href="#" aria-label="Instagram">&#128247;</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="collaborations.html">Collaborations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="career.html">Career</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Web Development</a></li>
+                        <li><a href="services.html">Mobile Apps</a></li>
+                        <li><a href="services.html">E-Commerce</a></li>
+                        <li><a href="services.html">UI/UX Design</a></li>
+                        <li><a href="services.html">Cloud Solutions</a></li>
+                        <li><a href="services.html">Digital Marketing</a></li>
+                        <li><a href="services.html">Education &amp; Admission</a></li>
+                        <li><a href="services.html">Documentation &amp; Research</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest updates, insights, and technology trends delivered straight to your inbox.</p>
+                    <form class="newsletter-form" action="#" method="POST">
+                        <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                        <button type="submit">Subscribe &#8594;</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Pravara Infotech. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCROLL TO TOP ========== -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">&#8593;</button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
